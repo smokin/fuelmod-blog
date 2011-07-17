@@ -4,9 +4,37 @@ namespace Blog;
 
 class Model_Post extends \Model {
 
-	public static function find($id)
+	public static function get_by_id_or_slug($id)
 	{
-		return static::_query()->where('id', $id)->execute()->current();
+		$query = null;
+
+		if (is_numeric($id))
+		{
+			$query = static::get()->where('id', $id);
+		}
+		else
+		{
+			$query = static::get()->where('slug', $id);
+		}
+		
+		return $query->execute()->current();
+	}
+	
+	public static function get_with_pagination()
+	{
+		return static::get()
+			->limit(\Pagination::$per_page)
+			->offset(\Pagination::$offset)
+			->order_by('id', 'asc')
+			->execute()
+			->as_array();
+	}
+	
+	public static function count()
+	{
+		$result = \DB::select(\DB::expr('COUNT(*) as count'))->from('blog_posts')->execute()->current();
+
+		return $result['count'];
 	}
 	
 	public static function get()

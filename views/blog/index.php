@@ -10,3 +10,6 @@
 	</article>
 	<?php endforeach ?>
 <?php endif ?>
+<div class="pagination">
+	<?php echo $pagination ?> 
+</div>
