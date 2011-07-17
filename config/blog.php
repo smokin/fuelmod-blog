@@ -7,8 +7,8 @@ return array(
 	'title' => 'FuelPHP Blog Module',
 	
 	'pagination' => array(
-		'per_page' => 1
+		'per_page' => 3
 	),
 );
 
-/* End of file: config.php */
+/* End of file: blog.php */

@@ -4,6 +4,10 @@ namespace Blog;
 
 class Model_Post extends \Model {
 
+	const UNPUBLISHED = 0;
+	const PUBLISHED   = 1;
+	const REMOVED     = 2;
+
 	public static function get_by_id_or_slug($id)
 	{
 		$query = null;
@@ -17,7 +21,7 @@ class Model_Post extends \Model {
 			$query = static::get()->where('slug', $id);
 		}
 		
-		return $query->execute()->current();
+		return $query->where('status', static::PUBLISHED)->execute()->current();
 	}
 	
 	public static function get_with_pagination()
@@ -25,14 +29,19 @@ class Model_Post extends \Model {
 		return static::get()
 			->limit(\Pagination::$per_page)
 			->offset(\Pagination::$offset)
-			->order_by('id', 'asc')
+			->order_by('id', 'ASC')
+			->where('status', static::PUBLISHED)
 			->execute()
 			->as_array();
 	}
 	
 	public static function count()
 	{
-		$result = \DB::select(\DB::expr('COUNT(*) as count'))->from('blog_posts')->execute()->current();
+		$result = \DB::select(\DB::expr('COUNT(*) as count'))
+			->from('blog_posts')
+			->where('status', static::PUBLISHED)
+			->execute()
+			->current();
 
 		return $result['count'];
 	}

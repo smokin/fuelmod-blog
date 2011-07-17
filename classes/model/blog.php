@@ -27,36 +27,43 @@ class Model_Blog extends \Model {
 	 *
 	 * @param boolean has this already been run?
 	 */
-	public static function install($installed)
+	public static function install()
 	{
-		if ( ! $installed)
-		{
-			\DBUtil::drop_table('blog_posts');
-			\DBUtil::drop_table('blog_tags');
-			\DBUtil::drop_table('blog_comments');
-		
-			\DBUtil::create_table('blog_posts', array(
-				'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
-				'title' => array('constraint' => 140, 'type' => 'varchar', 'null' => false),
-				'body' => array('type' => 'text', 'null' => false),
-				'created_at' => array('constraint' => 11, 'type' => 'int'),
-				'updated_at' => array('constraint' => 11, 'type' => 'int'),
-			), array('id'));
-			
-			\DBUtil::create_table('blog_tags', array(
-				'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
-				'post_id' => array('constraint' => 11, 'type' => 'int'),
-				'title' => array('constraint' => 140, 'type' => 'varchar', 'null' => false),
-			), array('id'));
-			
-			\DBUtil::create_table('blog_comments', array(
-				'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
-				'post_id' => array('constraint' => 11, 'type' => 'int'),
-				'body' => array('type' => 'text', 'null' => false),
-				'created_at' => array('constraint' => 11, 'type' => 'int'),
-				'updated_at' => array('constraint' => 11, 'type' => 'int'),
-			), array('id'));
-		}
+		\DBUtil::drop_table('blog_posts');
+		\DBUtil::drop_table('blog_tags');
+		\DBUtil::drop_table('blog_comments');
+
+		\DBUtil::create_table('blog_posts', array(
+			'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
+			'title' => array('constraint' => 140, 'type' => 'varchar', 'null' => false),
+			'body' => array('type' => 'text', 'null' => false),
+			'status' => array('constraint' => 1, 'type' => 'int', 'default' => 0),
+			'created_at' => array('constraint' => 11, 'type' => 'int'),
+			'updated_at' => array('constraint' => 11, 'type' => 'int'),
+		), array('id'));
+	
+		\DBUtil::create_table('blog_tags', array(
+			'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
+			'post_id' => array('constraint' => 11, 'type' => 'int'),
+			'title' => array('constraint' => 140, 'type' => 'varchar', 'null' => false),
+		), array('id'));
+	
+		\DBUtil::create_table('blog_comments', array(
+			'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
+			'post_id' => array('constraint' => 11, 'type' => 'int'),
+			'body' => array('type' => 'text', 'null' => false),
+			'status' => array('constraint' => 1, 'type' => 'int', 'default' => 0),
+			'created_at' => array('constraint' => 11, 'type' => 'int'),
+			'updated_at' => array('constraint' => 11, 'type' => 'int'),
+		), array('id'));
+	
+		// Insert Sample data.
+		\DB::insert('blog_posts')->set(array('title' => 'Post One', 'body' => 'This is the body', 'status' => 0, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Two', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Three', 'body' => 'This is the body', 'status' => 2, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Four', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Five', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Six', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
 	}
 
 	/**
