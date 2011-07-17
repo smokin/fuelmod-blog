@@ -1,13 +1,13 @@
 <?php if (count($posts) == 0) : ?>
-	<article class="no-posts">
+	<div class="no-posts">
 		<p>There are no posts to display.</p>
-	</article>
+	</div>
 <?php else : ?>
 	<?php foreach ($posts as $post) : ?>
-	<article class="post">
+	<div class="post">
 		<?php echo \Html::anchor('blog/view/'.$post->id, \Html::h($post->title, 3)) ?> 
 		<?php echo $post->body ?> 
-	</article>
+	</div>
 	<?php endforeach ?>
 <?php endif ?>
 <div class="pagination">

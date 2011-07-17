@@ -1,4 +1,4 @@
-<article class="blog-post">
-	<header><?php echo \Html::h($post->title, 2) ?></header>
+<div class="blog-post">
+	<?php echo \Html::h($post->title, 2) ?> 
 	<?php echo $post->body ?> 
-</article>
+</div>
