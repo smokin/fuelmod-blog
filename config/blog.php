@@ -1,6 +1,8 @@
 <?php
 
 
-return array();
+return array(
+	'installed' => true,
+);
 
 /* End of file: config.php */

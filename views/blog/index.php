@@ -1,1 +1,1 @@
-Placeholder
+This is the listing of blog articles.
