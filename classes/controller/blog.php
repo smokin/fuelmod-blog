@@ -35,6 +35,11 @@ class Controller_Blog extends Controller_Base {
 	{
 		$id and $post = Model_Post::get_by_id_or_slug($id);
 
+		if ( ! $post)
+		{
+			\Request::show_404();
+		}
+
 		$this->template->content = \View::factory('blog/view', array('post' => $post));
 	}
 
@@ -45,8 +50,8 @@ class Controller_Blog extends Controller_Base {
 
 	public function action_widget_latest_posts($amount = 6)
 	{
-		$posts = Model_Post::get()->limit($amount)->execute()->as_array();
-		
+		$posts = Model_Post::get()->where('status', Model_Post::PUBLISHED)->limit($amount)->execute()->as_array();
+
 		$this->response->body = \View::factory('blog/widgets/latest_posts', array('posts' => $posts));
 	}
 }

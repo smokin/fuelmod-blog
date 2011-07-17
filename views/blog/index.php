@@ -5,7 +5,7 @@
 <?php else : ?>
 	<?php foreach ($posts as $post) : ?>
 	<div class="post">
-		<?php echo \Html::anchor('blog/view/'.$post->id, \Html::h($post->title, 3)) ?> 
+		<?php echo \Html::anchor('blog/'.$post->slug, \Html::h($post->title, 3)) ?> 
 		<?php echo $post->body ?> 
 	</div>
 	<?php endforeach ?>
