@@ -17,6 +17,13 @@ class Controller_Blog extends Controller_Base {
 
 		$this->template->content = \View::factory('blog/view', array('post' => $post));
 	}
+
+	public function action_widget_latest_posts($amount = 6)
+	{
+		$posts = Model_Post::get()->limit($amount)->execute()->as_array();
+		
+		$this->response->body = \View::factory('blog/widgets/latest_posts', array('posts' => $posts));
+	}
 }
 
 /* End of file: classes/controller/blog.php */

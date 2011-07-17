@@ -19,7 +19,7 @@ class Controller_Base extends \Controller_Template {
 	/**
 	 * @var boolean auto render template?
 	 */
-	public $auto_render = true;
+	public $auto_render = false;
 
 	/**
 	 * The before method
@@ -40,11 +40,17 @@ class Controller_Base extends \Controller_Template {
 			Model_Blog::install();
 		}
 
-		parent::before();
+		// Only setup templates for non-HVMC requests.
+		if (\Request::main() === \Request::active())
+		{
+			$this->auto_render = true;
 		
-		// Add some variables to views
-		$this->template->method = \Request::active()->route->action;
+			parent::before();
 		
+			// Add some variables to views
+			$this->template->method = \Request::active()->route->action;
+		}
+				
 		return;
 	}
 	

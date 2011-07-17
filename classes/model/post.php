@@ -13,6 +13,11 @@ class Model_Post extends \Model {
 
 		return static::_query()->where('id', $id)->execute()->current();
 	}
+	
+	public static function get()
+	{
+		return static::_query();
+	}
 
 	private static function _query()
 	{
