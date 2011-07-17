@@ -6,12 +6,16 @@ class Controller_Blog extends Controller_Base {
 
 	public function action_index()
 	{
-		$this->template->content = \View::factory('blog/index');
+		$posts = Model_Post::find('all');
+
+		$this->template->content = \View::factory('blog/index', array('posts' => $posts));
 	}
 
-	public function action_view()
+	public function action_view($id = null)
 	{
-		$this->template->content = \View::factory('blog/view');
+		$id and $post = Model_Post::find($id);
+
+		$this->template->content = \View::factory('blog/view', array('post' => $post));
 	}
 }
 

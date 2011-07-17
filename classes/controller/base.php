@@ -40,7 +40,12 @@ class Controller_Base extends \Controller_Template {
 			Model_Blog::install();
 		}
 
-		return parent::before();
+		parent::before();
+		
+		// Add some variables to views
+		$this->template->method = \Request::active()->route->action;
+		
+		return;
 	}
 	
 	/**
