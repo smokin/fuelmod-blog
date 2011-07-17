@@ -6,7 +6,7 @@ class Controller_Blog extends Controller_Base {
 
 	public function action_index()
 	{
-		$posts = Model_Post::find('all');
+		$posts = Model_Post::get()->limit(\Config::get('blog.index_items', 6))->execute()->as_array();
 
 		$this->template->content = \View::factory('blog/index', array('posts' => $posts));
 	}
