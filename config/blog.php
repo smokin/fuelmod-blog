@@ -4,11 +4,8 @@
 return array(
 	'installed' => true,
 	
-	// Number of items to show on index page.
-	'index_items' => 1,
-	
 	'pagination' => array(
-	
+		'per_page' => 1
 	),
 );
 

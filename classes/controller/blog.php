@@ -16,7 +16,7 @@ class Controller_Blog extends Controller_Base {
 		\Pagination::set_config(array(
 			'pagination_url' => \URI::create('blog/index'),
 			'total_items'    => Model_Post::count(),
-			'per_page'       => \Config::get('blog.index_items', 6),
+			'per_page'       => \Config::get('blog.pagination.per_page', 6),
 			'uri_segment'    => 3,
 		));
 
