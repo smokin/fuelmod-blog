@@ -36,6 +36,7 @@ class Model_Blog extends \Model {
 		\DBUtil::create_table('blog_posts', array(
 			'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
 			'title' => array('constraint' => 140, 'type' => 'varchar', 'null' => false),
+			'slug' => array('constraint' => 60, 'type' => 'varchar', 'null' => false),
 			'body' => array('type' => 'text', 'null' => false),
 			'status' => array('constraint' => 1, 'type' => 'int', 'default' => 0),
 			'created_at' => array('constraint' => 11, 'type' => 'int'),
@@ -58,12 +59,12 @@ class Model_Blog extends \Model {
 		), array('id'));
 	
 		// Insert Sample data.
-		\DB::insert('blog_posts')->set(array('title' => 'Post One', 'body' => 'This is the body', 'status' => 0, 'created_at' => time()))->execute();
-		\DB::insert('blog_posts')->set(array('title' => 'Post Two', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
-		\DB::insert('blog_posts')->set(array('title' => 'Post Three', 'body' => 'This is the body', 'status' => 2, 'created_at' => time()))->execute();
-		\DB::insert('blog_posts')->set(array('title' => 'Post Four', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
-		\DB::insert('blog_posts')->set(array('title' => 'Post Five', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
-		\DB::insert('blog_posts')->set(array('title' => 'Post Six', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post One', 'slug' => 'post-one', 'body' => 'This is the body', 'status' => 0, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Two', 'slug' => 'post-two', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Three', 'slug' => 'post-three', 'body' => 'This is the body', 'status' => 2, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Four', 'slug' => 'post-four', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Five', 'slug' => 'post-five', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
+		\DB::insert('blog_posts')->set(array('title' => 'Post Six', 'slug' => 'post-six', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
 	}
 
 	/**
