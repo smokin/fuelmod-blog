@@ -49,8 +49,9 @@ class Controller_Base extends \Controller_Template {
 		
 			// Add some variables to views
 			$this->template->method = \Request::active()->route->action;
+			$this->template->set_global('site', \Config::get('blog.site', array()));
 		}
-				
+		
 		return;
 	}
 	

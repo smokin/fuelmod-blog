@@ -4,7 +4,9 @@
 return array(
 	'installed' => true,
 	
-	'title' => 'FuelPHP Blog Module',
+	'site' => array(
+		'title' => 'FuelPHP Blog Module',
+	),
 	
 	'pagination' => array(
 		'per_page' => 3

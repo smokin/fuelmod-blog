@@ -20,7 +20,7 @@ class Model_Post extends \Model {
 		{
 			$query = static::get()->where('slug', $id);
 		}
-		
+
 		return $query->where('status', static::PUBLISHED)->execute()->current();
 	}
 	
