@@ -35,6 +35,31 @@ class Model_Post extends \Model {
 			->as_array();
 	}
 	
+	public static function get_by_tag_with_pagination($tag)
+	{
+		$tags = Model_Tag::get_posts_ids($tag);
+		
+		if (count($tags) === 0)
+		{
+			return false;
+		}
+		
+		$post_ids = array();
+		
+		foreach ($tags as $tag)
+		{
+			array_push($post_ids, $tag->post_id);
+		}
+
+		return static::get()
+			->limit(\Pagination::$per_page)
+			->offset(\Pagination::$offset)
+			->order_by('id', 'ASC')
+			->where('id', 'in', $post_ids)
+			->execute()
+			->as_array();
+	}
+	
 	public static function count()
 	{
 		$result = \DB::select(\DB::expr('COUNT(*) as count'))

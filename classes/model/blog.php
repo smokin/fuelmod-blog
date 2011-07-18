@@ -46,7 +46,7 @@ class Model_Blog extends \Model {
 		\DBUtil::create_table('blog_tags', array(
 			'id' => array('constraint' => 11, 'type' => 'int', 'auto_increment' => true),
 			'post_id' => array('constraint' => 11, 'type' => 'int'),
-			'title' => array('constraint' => 140, 'type' => 'varchar', 'null' => false),
+			'title' => array('constraint' => 40, 'type' => 'varchar', 'null' => false),
 		), array('id'));
 	
 		\DBUtil::create_table('blog_comments', array(
@@ -58,13 +58,23 @@ class Model_Blog extends \Model {
 			'updated_at' => array('constraint' => 11, 'type' => 'int'),
 		), array('id'));
 	
-		// Insert Sample data.
+		// Insert Sample post data.
 		\DB::insert('blog_posts')->set(array('title' => 'Post One', 'slug' => 'post-one', 'body' => 'This is the body', 'status' => 0, 'created_at' => time()))->execute();
 		\DB::insert('blog_posts')->set(array('title' => 'Post Two', 'slug' => 'post-two', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
 		\DB::insert('blog_posts')->set(array('title' => 'Post Three', 'slug' => 'post-three', 'body' => 'This is the body', 'status' => 2, 'created_at' => time()))->execute();
 		\DB::insert('blog_posts')->set(array('title' => 'Post Four', 'slug' => 'post-four', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
 		\DB::insert('blog_posts')->set(array('title' => 'Post Five', 'slug' => 'post-five', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
 		\DB::insert('blog_posts')->set(array('title' => 'Post Six', 'slug' => 'post-six', 'body' => 'This is the body', 'status' => 1, 'created_at' => time()))->execute();
+	
+		// Insert Sample tag data.
+		\DB::insert('blog_tags')->set(array('post_id' => 1, 'title' => 'Tag One'))->execute();
+		\DB::insert('blog_tags')->set(array('post_id' => 1, 'title' => 'Tag Two'))->execute();
+		\DB::insert('blog_tags')->set(array('post_id' => 1, 'title' => 'Tag Three'))->execute();
+		\DB::insert('blog_tags')->set(array('post_id' => 2, 'title' => 'Tag One'))->execute();
+		\DB::insert('blog_tags')->set(array('post_id' => 3, 'title' => 'Tag One'))->execute();
+		\DB::insert('blog_tags')->set(array('post_id' => 3, 'title' => 'Tag Four'))->execute();
+		\DB::insert('blog_tags')->set(array('post_id' => 5, 'title' => 'Tag One'))->execute();
+		\DB::insert('blog_tags')->set(array('post_id' => 6, 'title' => 'Tag Two'))->execute();
 	}
 
 	/**

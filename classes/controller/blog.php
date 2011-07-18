@@ -27,6 +27,26 @@ class Controller_Blog extends Controller_Base {
 	}
 
 	/**
+	 *
+	 */
+	public function action_tag($tag, $offset = 0)
+	{
+		$tag = urldecode($tag);
+		
+		\Pagination::set_config(array(
+			'pagination_url' => \URI::create('blog/tag/'.urlencode($tag)),
+			'total_items'    => Model_Tag::count($tag),
+			'per_page'       => \Config::get('blog.pagination.per_page', 6),
+			'uri_segment'    => 4,
+		));
+		
+		$posts = Model_Post::get_by_tag_with_pagination($tag);
+		$data = array('posts' => $posts, 'pagination' => \Pagination::create_links(), 'tag' => $tag);
+		
+		$this->template->content = \View::factory('blog/index', $data, false);
+	}
+
+	/**
 	 * View a single blog post
 	 *
 	 * @param integer|string id or slug of blog post
@@ -53,6 +73,13 @@ class Controller_Blog extends Controller_Base {
 		$posts = Model_Post::get()->where('status', Model_Post::PUBLISHED)->limit($amount)->execute()->as_array();
 
 		$this->response->body = \View::factory('blog/widgets/latest_posts', array('posts' => $posts));
+	}
+	
+	public function action_widget_tags()
+	{
+		$tags = Model_Tag::list_distinct();
+		
+		$this->response->body = \View::factory('blog/widgets/tags', array('tags' => $tags));
 	}
 }
 

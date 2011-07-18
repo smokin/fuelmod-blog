@@ -17,7 +17,8 @@
 <?php echo $content ?> 
 </div>
 <div class="sidebar">
-	<?php echo Blog\Widget::get('blog/widget_latest_posts/4') ?>
+	<?php echo Blog\Widget::get('blog/widget_latest_posts/4') ?> 
+	<?php echo Blog\Widget::get('blog/widget_tags') ?> 
 </div>
 </div>
 
